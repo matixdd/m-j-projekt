@@ -7,223 +7,182 @@
 <title>🦆 RICK DUCK 🦆</title>
 
 <style>
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    overflow: hidden;
-    background:
-        radial-gradient(circle at 20% 20%, #fff176, transparent 25%),
-        radial-gradient(circle at 80% 80%, #81d4fa, transparent 30%),
-        linear-gradient(135deg, #4fc3f7, #fff59d);
-
-    font-family: Arial, sans-serif;
-}
-
-/* =========================
-   FILM
-========================= */
-
-.film {
-    position: fixed;
-
-    width: 80vw;
-    height: 80vh;
-
-    max-width: 1200px;
-    max-height: 675px;
-
-    left: 50%;
-    top: 50%;
-
-    transform: translate(-50%, -50%);
-
-    z-index: 10;
-
-    border: 8px solid white;
-    border-radius: 25px;
-
-    box-shadow:
-        0 0 30px black,
-        0 0 80px rgba(255,255,255,0.8);
-
-    background: black;
-}
-
-/* =========================
-   KACZKI
-========================= */
-
-.duck {
-    position: fixed;
-    z-index: 20;
-
-    font-size: var(--size);
-
-    left: -100px;
-    top: var(--top);
-
-    animation: fly var(--speed) linear infinite;
-
-    animation-delay: var(--delay);
-
-    filter: drop-shadow(3px 5px 3px rgba(0,0,0,0.35));
-
-    user-select: none;
-    pointer-events: none;
-}
-
-@keyframes fly {
-
-    0% {
-        transform:
-            translateX(-150px)
-            translateY(0)
-            rotate(-15deg);
+    * {
+        box-sizing: border-box;
     }
 
-    20% {
-        transform:
-            translateX(25vw)
-            translateY(-100px)
-            rotate(20deg);
+    body {
+        margin: 0;
+        overflow: hidden;
+        background: linear-gradient(135deg, #4fc3f7, #fff176);
+        font-family: Arial, sans-serif;
     }
 
-    40% {
-        transform:
-            translateX(50vw)
-            translateY(150px)
-            rotate(-20deg);
-    }
-
-    60% {
-        transform:
-            translateX(75vw)
-            translateY(-120px)
-            rotate(15deg);
-    }
-
-    80% {
-        transform:
-            translateX(100vw)
-            translateY(100px)
-            rotate(-10deg);
-    }
-
-    100% {
-        transform:
-            translateX(120vw)
-            translateY(-50px)
-            rotate(20deg);
-    }
-}
-
-/* =========================
-   PRZYCISK
-========================= */
-
-#downloadButton {
-
-    position: fixed;
-
-    bottom: 20px;
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    z-index: 100;
-
-    padding: 15px 30px;
-
-    border: 4px solid white;
-    border-radius: 20px;
-
-    background: #ffca28;
-
-    color: #222;
-
-    font-size: 20px;
-    font-weight: bold;
-
-    cursor: pointer;
-
-    box-shadow:
-        0 5px 20px rgba(0,0,0,0.4);
-}
-
-#downloadButton:hover {
-    background: #ffd740;
-    transform: translateX(-50%) scale(1.08);
-}
-
-/* =========================
-   TELEFON
-========================= */
-
-@media (max-width: 700px) {
-
+    /* DUŻY FILM */
     .film {
-        width: 94vw;
-        height: 53vw;
+        position: fixed;
+        width: 85vw;
+        height: 78vh;
 
-        border-width: 5px;
+        left: 50%;
+        top: 50%;
+
+        transform: translate(-50%, -50%);
+
+        z-index: 10;
+
+        border: 8px solid white;
+        border-radius: 25px;
+
+        box-shadow: 0 0 40px rgba(0,0,0,0.7);
+
+        background: black;
     }
 
+    /* KACZKI */
     .duck {
-        font-size: 35px;
+        position: fixed;
+
+        left: -120px;
+
+        font-size: var(--size);
+
+        z-index: 20;
+
+        animation:
+            fly var(--speed) linear infinite;
+
+        animation-delay: var(--delay);
+
+        user-select: none;
+        pointer-events: none;
+
+        filter: drop-shadow(
+            3px 5px 4px rgba(0,0,0,0.4)
+        );
     }
 
-    #downloadButton {
-        font-size: 15px;
-        padding: 10px 18px;
+    @keyframes fly {
+
+        0% {
+            transform:
+                translateX(-150px)
+                translateY(0)
+                rotate(-20deg);
+        }
+
+        20% {
+            transform:
+                translateX(20vw)
+                translateY(-100px)
+                rotate(20deg);
+        }
+
+        40% {
+            transform:
+                translateX(45vw)
+                translateY(150px)
+                rotate(-15deg);
+        }
+
+        60% {
+            transform:
+                translateX(70vw)
+                translateY(-120px)
+                rotate(20deg);
+        }
+
+        80% {
+            transform:
+                translateX(95vw)
+                translateY(100px)
+                rotate(-20deg);
+        }
+
+        100% {
+            transform:
+                translateX(120vw)
+                translateY(-50px)
+                rotate(15deg);
+        }
     }
-}
+
+    /* PRZYCISK */
+    #downloadButton {
+        position: fixed;
+
+        bottom: 20px;
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        z-index: 100;
+
+        padding: 15px 30px;
+
+        border: 4px solid white;
+        border-radius: 20px;
+
+        background: #ffca28;
+
+        color: #222;
+
+        font-size: 20px;
+        font-weight: bold;
+
+        cursor: pointer;
+
+        box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+    }
+
+    #downloadButton:hover {
+        background: #ffd740;
+    }
+
+    @media (max-width: 700px) {
+
+        .film {
+            width: 94vw;
+            height: 53vw;
+        }
+
+        .duck {
+            font-size: 35px;
+        }
+
+        #downloadButton {
+            font-size: 15px;
+            padding: 10px 18px;
+        }
+    }
 </style>
 </head>
 
 <body>
 
+<!-- ==============================
+     RÓŻNE KACZKI
+============================== -->
 
-<!-- =====================================
-     RÓŻNE LATAJĄCE KACZKI
-====================================== -->
+<div class="duck" style="--size:55px;--speed:9s;--delay:-2s;--top:5%;">🦆</div>
+<div class="duck" style="--size:75px;--speed:13s;--delay:-7s;--top:15%;">🐥</div>
+<div class="duck" style="--size:45px;--speed:8s;--delay:-4s;--top:30%;">🐤</div>
+<div class="duck" style="--size:90px;--speed:16s;--delay:-11s;--top:45%;">🦆</div>
+<div class="duck" style="--size:60px;--speed:10s;--delay:-5s;--top:60%;">🐥</div>
+<div class="duck" style="--size:80px;--speed:14s;--delay:-9s;--top:75%;">🐤</div>
+<div class="duck" style="--size:50px;--speed:7s;--delay:-3s;--top:85%;">🦆</div>
+<div class="duck" style="--size:40px;--speed:11s;--delay:-8s;--top:25%;">🐥</div>
+<div class="duck" style="--size:70px;--speed:18s;--delay:-15s;--top:70%;">🐤</div>
+<div class="duck" style="--size:45px;--speed:12s;--delay:-6s;--top:10%;">🦆</div>
+<div class="duck" style="--size:100px;--speed:20s;--delay:-17s;--top:50%;">🐥</div>
+<div class="duck" style="--size:55px;--speed:9s;--delay:-1s;--top:90%;">🐤</div>
+<div class="duck" style="--size:65px;--speed:15s;--delay:-12s;--top:35%;">🦆</div>
+<div class="duck" style="--size:45px;--speed:8s;--delay:-6s;--top:65%;">🐥</div>
+<div class="duck" style="--size:85px;--speed:17s;--delay:-13s;--top:20%;">🐤</div>
 
-<div class="duck" style="--top:5%;--size:55px;--speed:9s;--delay:-2s;">🦆</div>
-
-<div class="duck" style="--top:15%;--size:75px;--speed:13s;--delay:-7s;">🐥</div>
-
-<div class="duck" style="--top:30%;--size:45px;--speed:8s;--delay:-4s;">🦆</div>
-
-<div class="duck" style="--top:45%;--size:90px;--speed:16s;--delay:-11s;">🐤</div>
-
-<div class="duck" style="--top:60%;--size:60px;--speed:10s;--delay:-5s;">🦆</div>
-
-<div class="duck" style="--top:75%;--size:80px;--speed:14s;--delay:-9s;">🐥</div>
-
-<div class="duck" style="--top:85%;--size:50px;--speed:7s;--delay:-3s;">🦆</div>
-
-<div class="duck" style="--top:25%;--size:40px;--speed:11s;--delay:-8s;">🐤</div>
-
-<div class="duck" style="--top:70%;--size:70px;--speed:18s;--delay:-15s;">🦆</div>
-
-<div class="duck" style="--top:10%;--size:45px;--speed:12s;--delay:-6s;">🐥</div>
-
-<div class="duck" style="--top:50%;--size:100px;--speed:20s;--delay:-17s;">🦆</div>
-
-<div class="duck" style="--top:90%;--size:55px;--speed:9s;--delay:-1s;">🐤</div>
-
-<div class="duck" style="--top:35%;--size:65px;--speed:15s;--delay:-12s;">🦆</div>
-
-<div class="duck" style="--top:65%;--size:45px;--speed:8s;--delay:-6s;">🐥</div>
-
-<div class="duck" style="--top:20%;--size:85px;--speed:17s;--delay:-13s;">🦆</div>
-
-
-<!-- =====================================
+<!-- ==============================
      RICKROLL
-====================================== -->
+============================== -->
 
 <iframe
     class="film"
@@ -233,26 +192,17 @@ body {
     allowfullscreen>
 </iframe>
 
-
-<!-- =====================================
-     POBIERANIE
-====================================== -->
-
 <button id="downloadButton">
     🦆 POBIERZ KACZKI 🦆
 </button>
 
-
 <script>
 
-/*
-=================================================
-TWORZENIE RÓŻNYCH KACZEK
-=================================================
-*/
+/* ==============================
+   LISTA KACZEK
+============================== */
 
 const kaczki = [
-
     "🦆",
     "🐥",
     "🐤",
@@ -262,73 +212,58 @@ const kaczki = [
     "🦆",
     "🐥",
     "🐤",
-    "🦆",
-    "🐥",
-    "🐤"
+    "🦆"
 ];
 
 
-/*
-=================================================
-TWORZENIE PLIKU SVG
-=================================================
-*/
+/* ==============================
+   TWORZENIE OBRAZKA
+============================== */
 
 function stworzKaczke(emoji, numer) {
 
     return `
-<svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="600"
-    height="600"
-    viewBox="0 0 600 600">
+    <svg xmlns="http://www.w3.org/2000/svg"
+         width="600"
+         height="600"
+         viewBox="0 0 600 600">
 
-    <rect
-        width="600"
-        height="600"
-        rx="40"
-        fill="#87CEEB"/>
+        <rect
+            width="600"
+            height="600"
+            rx="40"
+            fill="#87CEEB"/>
 
-    <circle
-        cx="300"
-        cy="300"
-        r="230"
-        fill="#ffffff"
-        opacity="0.3"/>
+        <text
+            x="300"
+            y="370"
+            text-anchor="middle"
+            font-size="260">
 
-    <text
-        x="300"
-        y="370"
-        text-anchor="middle"
-        font-size="260">
+            ${emoji}
 
-        ${emoji}
+        </text>
 
-    </text>
+        <text
+            x="300"
+            y="530"
+            text-anchor="middle"
+            font-family="Arial"
+            font-size="35"
+            font-weight="bold">
 
-    <text
-        x="300"
-        y="530"
-        text-anchor="middle"
-        font-family="Arial"
-        font-size="35"
-        font-weight="bold">
+            KACZKA ${numer}
 
-        KACZKA ${numer}
+        </text>
 
-    </text>
-
-</svg>
-`;
-
+    </svg>
+    `;
 }
 
 
-/*
-=================================================
-POBIERANIE JEDNEJ KACZKI
-=================================================
-*/
+/* ==============================
+   POBIERANIE
+============================== */
 
 function pobierzKaczke(emoji, numer) {
 
@@ -336,7 +271,7 @@ function pobierzKaczke(emoji, numer) {
 
     const blob = new Blob(
         [svg],
-        { type: "image/svg+xml" }
+        {type: "image/svg+xml"}
     );
 
     const url = URL.createObjectURL(blob);
@@ -344,9 +279,7 @@ function pobierzKaczke(emoji, numer) {
     const link = document.createElement("a");
 
     link.href = url;
-
-    link.download =
-        "kaczka_" + numer + ".svg";
+    link.download = "kaczka_" + numer + ".svg";
 
     document.body.appendChild(link);
 
@@ -354,25 +287,20 @@ function pobierzKaczke(emoji, numer) {
 
     document.body.removeChild(link);
 
-    URL.revokeObjectURL(url);
+    setTimeout(function() {
+        URL.revokeObjectURL(url);
+    }, 1000);
 }
 
 
-/*
-=================================================
-PRÓBA AUTOMATYCZNEGO POBRANIA
-=================================================
-*/
+/* ==============================
+   AUTOMATYCZNE POBIERANIE
+   CO 2 SEKUNDY
+============================== */
 
 window.addEventListener("load", function() {
 
     setTimeout(function() {
-
-        /*
-        Próbujemy pobrać wszystkie kaczki.
-        Niektóre przeglądarki mogą zablokować
-        wielokrotne automatyczne pobieranie.
-        */
 
         kaczki.forEach(function(emoji, index) {
 
@@ -383,20 +311,18 @@ window.addEventListener("load", function() {
                     index + 1
                 );
 
-            }, index * 500);
+            }, index * 2000);
 
         });
 
-    }, 2000);
+    }, 3000);
 
 });
 
 
-/*
-=================================================
-PRZYCISK
-=================================================
-*/
+/* ==============================
+   PRZYCISK
+============================== */
 
 document
     .getElementById("downloadButton")
@@ -411,7 +337,7 @@ document
                     index + 1
                 );
 
-            }, index * 500);
+            }, index * 2000);
 
         });
 
