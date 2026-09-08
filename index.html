@@ -4,34 +4,44 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>DUCK CHAOS 🦆</title>
+<title>🦆 DUCK CHAOS 🦆</title>
 
 <style>
+
+/* =====================================================
+   PODSTAWY
+===================================================== */
 
 * {
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     width: 100%;
     height: 100%;
+    margin: 0;
 }
 
 body {
-    margin: 0;
     overflow: hidden;
-    background: #70cfff;
+    background: #65c9ff;
     font-family: Arial, sans-serif;
 }
 
 
-/* =========================
-   ZMIENIAJĄCE SIĘ TŁO
-========================= */
+/* =====================================================
+   TŁO
+===================================================== */
 
 #background {
     position: fixed;
-    inset: 0;
+
+    left: 0;
+    top: 0;
+
+    width: 100vw;
+    height: 100vh;
 
     z-index: 0;
 
@@ -40,13 +50,15 @@ body {
 
     filter: brightness(0.38);
 
-    transition: opacity 0.7s ease;
+    opacity: 1;
+
+    transition: opacity 0.8s ease;
 }
 
 
-/* =========================
-   KACZKI
-========================= */
+/* =====================================================
+   LATAJĄCE KACZKI
+===================================================== */
 
 .duck {
     position: fixed;
@@ -60,62 +72,72 @@ body {
     border: 3px solid white;
 
     box-shadow:
-        0 4px 15px rgba(0,0,0,0.6);
+        0 4px 18px rgba(0, 0, 0, 0.65);
 
     pointer-events: none;
 
+    user-select: none;
+
+    will-change: transform;
+
     animation:
-        fly var(--speed) linear infinite;
+        duckFlight var(--speed) linear infinite;
 
     animation-delay: var(--delay);
 }
 
 
-@keyframes fly {
+/*
+   Kaczka przelatuje przez CAŁY ekran.
+*/
+
+@keyframes duckFlight {
 
     0% {
         left: -180px;
+
         transform:
-            translateY(0)
-            rotate(-20deg);
+            translate3d(0, 0, 0)
+            rotate(-15deg);
     }
 
     20% {
         transform:
-            translateY(-180px)
+            translate3d(20vw, -14vh, 0)
             rotate(25deg);
     }
 
     40% {
         transform:
-            translateY(180px)
-            rotate(-25deg);
+            translate3d(42vw, 15vh, 0)
+            rotate(-30deg);
     }
 
     60% {
         transform:
-            translateY(-150px)
-            rotate(30deg);
+            translate3d(64vw, -12vh, 0)
+            rotate(25deg);
     }
 
     80% {
         transform:
-            translateY(120px)
-            rotate(-20deg);
+            translate3d(86vw, 12vh, 0)
+            rotate(-25deg);
     }
 
     100% {
-        left: 110vw;
+        left: 115vw;
+
         transform:
-            translateY(-100px)
-            rotate(25deg);
+            translate3d(0, -8vh, 0)
+            rotate(30deg);
     }
 }
 
 
-/* =========================
+/* =====================================================
    FILM
-========================= */
+===================================================== */
 
 #filmBox {
 
@@ -123,14 +145,11 @@ body {
 
     z-index: 20;
 
-    left: 50%;
-    top: 50%;
+    left: 0;
+    top: 0;
 
-    width: 55vw;
-    height: 55vh;
-
-    transform:
-        translate(-50%, -50%);
+    width: 40vw;
+    height: 40vh;
 
     border: 6px solid white;
 
@@ -142,10 +161,19 @@ body {
 
     box-shadow:
         0 0 40px black,
-        0 0 100px rgba(255,255,255,0.6);
+        0 0 100px rgba(255, 255, 255, 0.7);
+
+    transform-origin: center center;
+
+    /*
+       Prawdziwy ruch po ekranie.
+       Zmieniamy X, Y oraz Z.
+    */
 
     animation:
-        filmSize 1.4s infinite alternate ease-in-out;
+        filmFlight 5s linear infinite;
+
+    will-change: transform;
 }
 
 
@@ -155,45 +183,138 @@ body {
     height: 100%;
 
     border: 0;
+
+    display: block;
 }
 
 
-/* film zmienia rozmiar */
+/* =====================================================
+   RUCH FILMU — X + Y + Z
+===================================================== */
 
-@keyframes filmSize {
+@keyframes filmFlight {
+
+    /*
+       LEWY GÓRNY
+    */
 
     0% {
-        width: 45vw;
-        height: 45vh;
 
         transform:
-            translate(-50%, -50%)
-            rotate(-2deg);
+            translate3d(-10vw, 5vh, 0)
+            scale(0.55)
+            rotate(-7deg);
     }
+
+
+    /*
+       PRAWA GÓRA
+    */
+
+    12.5% {
+
+        transform:
+            translate3d(65vw, 4vh, 0)
+            scale(1.10)
+            rotate(7deg);
+    }
+
+
+    /*
+       LEWA ŚRODKOWA
+    */
+
+    25% {
+
+        transform:
+            translate3d(-8vw, 25vh, 0)
+            scale(0.65)
+            rotate(-10deg);
+    }
+
+
+    /*
+       PRAWA ŚRODKOWA
+    */
+
+    37.5% {
+
+        transform:
+            translate3d(68vw, 30vh, 0)
+            scale(1.25)
+            rotate(10deg);
+    }
+
+
+    /*
+       LEWY DÓŁ
+    */
 
     50% {
-        width: 62vw;
-        height: 58vh;
 
         transform:
-            translate(-50%, -50%)
-            rotate(2deg);
+            translate3d(-10vw, 55vh, 0)
+            scale(0.60)
+            rotate(-8deg);
     }
 
-    100% {
-        width: 50vw;
-        height: 65vh;
+
+    /*
+       PRAWY DÓŁ
+    */
+
+    62.5% {
 
         transform:
-            translate(-50%, -50%)
-            rotate(-3deg);
+            translate3d(65vw, 60vh, 0)
+            scale(1.20)
+            rotate(8deg);
+    }
+
+
+    /*
+       LEWY ŚRODEK
+    */
+
+    75% {
+
+        transform:
+            translate3d(-7vw, 38vh, 0)
+            scale(1.30)
+            rotate(-12deg);
+    }
+
+
+    /*
+       PRAWA GÓRA
+    */
+
+    87.5% {
+
+        transform:
+            translate3d(70vw, 12vh, 0)
+            scale(0.55)
+            rotate(12deg);
+    }
+
+
+    /*
+       WRACA NA LEWO
+    */
+
+    100% {
+
+        transform:
+            translate3d(-10vw, 5vh, 0)
+            scale(0.55)
+            rotate(-7deg);
     }
 }
 
 
-/* =========================
-   PRZYCISK
-========================= */
+/* =====================================================
+   PRZYCISK DŹWIĘKU
+===================================================== */
 
 #soundButton {
 
@@ -201,8 +322,8 @@ body {
 
     z-index: 100;
 
-    bottom: 20px;
     left: 50%;
+    bottom: 20px;
 
     transform:
         translateX(-50%);
@@ -232,26 +353,44 @@ body {
         pointer;
 
     box-shadow:
-        0 5px 20px rgba(0,0,0,0.5);
+        0 5px 20px rgba(0, 0, 0, 0.5);
 }
 
+
+#soundButton:hover {
+
+    transform:
+        translateX(-50%)
+        scale(1.08);
+}
+
+
+/* =====================================================
+   MAŁE EKRANY
+===================================================== */
 
 @media (max-width: 700px) {
 
     #filmBox {
-        width: 82vw;
-        height: 48vh;
+
+        width: 65vw;
+        height: 38vh;
+
     }
 
     .duck {
+
         border-width: 2px;
+
     }
 
     #soundButton {
-        font-size: 14px;
-        padding: 10px 16px;
-    }
 
+        font-size: 14px;
+
+        padding:
+            10px 16px;
+    }
 }
 
 </style>
@@ -261,26 +400,23 @@ body {
 <body>
 
 
-<!-- =========================
+<!-- ===================================================
      TŁO
-========================= -->
+==================================================== -->
 
 <div id="background"></div>
 
 
 <script>
 
-/*
-====================================================
- PRAWDZIWE ZDJĘCIA KACZEK
-====================================================
+/* =====================================================
+   ZDJĘCIA KACZEK
 
-Te pliki pochodzą z Wikimedia Commons.
-
-Używamy Special:Redirect/file, dzięki czemu
-nie musimy wpisywać skomplikowanych adresów
-do oryginalnych plików.
-*/
+   UWAGA:
+   Są to zwykłe adresy obrazów.
+   Nie używamy tutaj <a download>.
+   Nie powodują więc przekierowania strony.
+===================================================== */
 
 const duckImages = [
 
@@ -288,37 +424,45 @@ const duckImages = [
 
     "https://commons.wikimedia.org/wiki/Special:Redirect/file/Mallard-Duck.jpg",
 
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Duck_.jpg",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Mallard_duck.1.jpg",
 
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Walking_duck.jpg",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Mallard_Duck.JPG",
 
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Duck-293474.jpg",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Mallard_Duck_%282542477675%29.jpg",
 
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Wild_duck_(Anas_platyrhynchos).jpg",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Mallard_Duck_%285729007662%29.jpg",
 
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Mallard_Duck_(2542477675).jpg",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Mallard_Duck_male_%284436797999%29.jpg",
 
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Male_mallard_duck.jpg",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Mallard_Duck_%28Drake%29.jpg",
 
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Duck_(1).JPG",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Mallard_duck_3246.jpg",
 
-    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Duck_(2).JPG"
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Female_mallard_duck_%281%29.jpg"
 
 ];
 
 
-/*
-====================================================
- TWORZENIE DUŻEJ LICZBY LATAJĄCYCH KACZEK
-====================================================
-*/
+/* =====================================================
+   TWORZENIE KACZEK
+===================================================== */
 
-for (let i = 0; i < 35; i++) {
+const DUCK_COUNT = 40;
+
+
+for (let i = 0; i < DUCK_COUNT; i++) {
 
     const duck =
         document.createElement("img");
 
-    duck.className = "duck";
+
+    duck.className =
+        "duck";
+
+
+    /*
+       Losowe zdjęcie.
+    */
 
     duck.src =
         duckImages[
@@ -328,17 +472,28 @@ for (let i = 0; i < 35; i++) {
             )
         ];
 
+
+    /*
+       Jeśli zdjęcie się nie załaduje,
+       ukrywamy tylko tę konkretną kaczkę.
+       Strona nadal działa.
+    */
+
+    duck.onerror = function() {
+
+        this.style.display =
+            "none";
+
+    };
+
+
+    /*
+       Losowy rozmiar.
+    */
+
     const size =
-        45 + Math.random() * 100;
+        45 + Math.random() * 95;
 
-    const speed =
-        2.5 + Math.random() * 4;
-
-    const top =
-        Math.random() * 95;
-
-    const delay =
-        -(Math.random() * 12);
 
     duck.style.width =
         size + "px";
@@ -346,28 +501,55 @@ for (let i = 0; i < 35; i++) {
     duck.style.height =
         size + "px";
 
+
+    /*
+       Losowa wysokość startowa.
+    */
+
     duck.style.top =
-        top + "%";
+        Math.random() * 95 + "%";
+
+
+    /*
+       Bardzo szybka prędkość:
+       od 1.8 do 5 sekund.
+    */
+
+    const speed =
+        1.8 + Math.random() * 3.2;
+
 
     duck.style.setProperty(
         "--speed",
         speed + "s"
     );
 
+
+    /*
+       Dzięki ujemnemu opóźnieniu
+       kaczki są od razu rozrzucone
+       po całej trasie.
+    */
+
+    const delay =
+        -(Math.random() * 8);
+
+
     duck.style.setProperty(
         "--delay",
         delay + "s"
     );
 
-    document.body.appendChild(duck);
+
+    document.body.appendChild(
+        duck
+    );
 }
 
 
-/*
-====================================================
- TŁO
-====================================================
-*/
+/* =====================================================
+   ZMIENIAJĄCE SIĘ TŁO
+===================================================== */
 
 const background =
     document.getElementById(
@@ -379,7 +561,7 @@ let backgroundIndex = 0;
 
 
 /*
- pierwsze zdjęcie
+   Pierwsze tło.
 */
 
 background.style.backgroundImage =
@@ -387,115 +569,52 @@ background.style.backgroundImage =
 
 
 /*
- zmiana tła co 4 sekundy
+   Zmieniamy zdjęcie co 4 sekundy.
 */
 
 setInterval(function() {
 
-    background.style.opacity = "0";
+    /*
+       Najpierw wygaszamy.
+    */
+
+    background.style.opacity =
+        "0";
+
 
     setTimeout(function() {
 
         backgroundIndex++;
 
+
         if (
             backgroundIndex >=
             duckImages.length
         ) {
+
             backgroundIndex = 0;
+
         }
+
 
         background.style.backgroundImage =
             `url("${duckImages[backgroundIndex]}")`;
 
-        background.style.opacity = "1";
+
+        background.style.opacity =
+            "1";
+
 
     }, 400);
 
 }, 4000);
 
-
-/*
-====================================================
- AUTOMATYCZNE POBIERANIE JPG
-====================================================
-*/
-
-
-let downloadIndex = 0;
-
-
-/*
- Funkcja pobierająca zdjęcie.
-
- Używamy linku z atrybutem download.
-*/
-
-function downloadDuck() {
-
-    const image =
-        duckImages[downloadIndex];
-
-    const link =
-        document.createElement("a");
-
-    link.href = image;
-
-    link.download =
-        "kaczka_" +
-        (downloadIndex + 1) +
-        ".jpg";
-
-    document.body.appendChild(link);
-
-    link.click();
-
-    document.body.removeChild(link);
-
-
-    downloadIndex++;
-
-    if (
-        downloadIndex >=
-        duckImages.length
-    ) {
-        downloadIndex = 0;
-    }
-
-}
-
-
-/*
-====================================================
- START POBIERANIA
-====================================================
-
-Pierwsze pobranie po 5 sekundach.
-
-Następne co 2 sekundy.
-*/
-
-setTimeout(function() {
-
-    downloadDuck();
-
-    setInterval(function() {
-
-        downloadDuck();
-
-    }, 2000);
-
-}, 5000);
-
-
-/*
-====================================================
- RICKROLL
-====================================================
-*/
-
 </script>
 
+
+<!-- ===================================================
+     RICKROLL
+==================================================== -->
 
 <div id="filmBox">
 
@@ -509,19 +628,26 @@ setTimeout(function() {
         allow="autoplay; encrypted-media"
 
         allowfullscreen>
+
     </iframe>
 
 </div>
 
 
-<!-- =========================
-     DŹWIĘK
-========================= -->
+<!-- ===================================================
+     PRZYCISK DŹWIĘKU
+==================================================== -->
 
 <button id="soundButton">
+
     🔊 WŁĄCZ KWAKANIE
+
 </button>
 
+
+<!-- ===================================================
+     DŹWIĘK KACZKI
+==================================================== -->
 
 <audio
     id="duckSound"
@@ -536,16 +662,15 @@ setTimeout(function() {
 
 <script>
 
-/*
-====================================================
- KWAKANIE CO 7 SEKUND
-====================================================
-*/
+/* =====================================================
+   DŹWIĘK
+===================================================== */
 
 const duckSound =
     document.getElementById(
         "duckSound"
     );
+
 
 const soundButton =
     document.getElementById(
@@ -553,24 +678,41 @@ const soundButton =
     );
 
 
-let soundEnabled = false;
+let soundEnabled =
+    false;
 
 
 /*
- Kliknięcie odblokowuje dźwięk.
+   Kliknięcie przycisku
+   odblokowuje audio.
 */
 
 soundButton.addEventListener(
     "click",
     function() {
 
-        soundEnabled = true;
+        soundEnabled =
+            true;
 
-        duckSound.volume = 0.8;
 
-        duckSound.currentTime = 0;
+        duckSound.volume =
+            0.8;
 
-        duckSound.play();
+
+        duckSound.currentTime =
+            0;
+
+
+        duckSound.play()
+            .catch(function(error) {
+
+                console.log(
+                    "Nie udało się odtworzyć dźwięku:",
+                    error
+                );
+
+            });
+
 
         soundButton.textContent =
             "🦆 KWAKANIE WŁĄCZONE 🦆";
@@ -580,35 +722,49 @@ soundButton.addEventListener(
 
 
 /*
- Próba automatycznego dźwięku.
+   Próba autoplay.
+
+   Przeglądarka może zablokować
+   dźwięk bez kliknięcia.
 */
 
 window.addEventListener(
     "load",
     function() {
 
+        duckSound.volume =
+            0.8;
+
+
         duckSound.play()
 
-        .then(function() {
+            .then(function() {
 
-            soundEnabled = true;
+                soundEnabled =
+                    true;
 
-        })
+            })
 
-        .catch(function() {
+            .catch(function() {
 
-            console.log(
-                "Przeglądarka zablokowała autoplay."
-            );
+                /*
+                   To normalne.
+                   Przeglądarki często blokują
+                   automatyczny dźwięk.
+                */
 
-        });
+                console.log(
+                    "Autoplay dźwięku został zablokowany."
+                );
+
+            });
 
     }
 );
 
 
 /*
- Kwakanie co 7 sekund.
+   KWAKANIE CO 7 SEKUND
 */
 
 setInterval(function() {
@@ -617,13 +773,25 @@ setInterval(function() {
         return;
     }
 
-    duckSound.currentTime = 0;
 
-    duckSound.play();
+    duckSound.currentTime =
+        0;
+
+
+    duckSound.play()
+        .catch(function(error) {
+
+            console.log(
+                "Błąd odtwarzania:",
+                error
+            );
+
+        });
 
 }, 7000);
 
 </script>
+
 
 </body>
 </html>
