@@ -1,207 +1,423 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>🦆 Duck Zone 🦆</title>
+<title>🦆 RICK DUCK 🦆</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+<style>
+* {
+    box-sizing: border-box;
+}
 
-        body {
-            margin: 0;
-            overflow: hidden;
-            background: linear-gradient(135deg, #87ceeb, #fff176);
-            font-family: Arial, sans-serif;
-        }
+body {
+    margin: 0;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 20% 20%, #fff176, transparent 25%),
+        radial-gradient(circle at 80% 80%, #81d4fa, transparent 30%),
+        linear-gradient(135deg, #4fc3f7, #fff59d);
 
-        /* Film na środku */
-        .film {
-            position: absolute;
-            width: 560px;
-            height: 315px;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 10;
-            border: 5px solid white;
-            border-radius: 15px;
-            box-shadow: 0 0 40px rgba(0,0,0,0.5);
-            background: black;
-        }
+    font-family: Arial, sans-serif;
+}
 
-        /* Kaczuszki */
-        .duck {
-            position: absolute;
-            font-size: 50px;
-            z-index: 5;
-            animation: latanie linear infinite;
-        }
+/* =========================
+   FILM
+========================= */
 
-        @keyframes latanie {
-            0% {
-                transform: translate(-100px, 100vh) rotate(0deg);
-            }
+.film {
+    position: fixed;
 
-            25% {
-                transform: translate(30vw, 20vh) rotate(20deg);
-            }
+    width: 80vw;
+    height: 80vh;
 
-            50% {
-                transform: translate(70vw, 70vh) rotate(-20deg);
-            }
+    max-width: 1200px;
+    max-height: 675px;
 
-            75% {
-                transform: translate(90vw, 10vh) rotate(15deg);
-            }
+    left: 50%;
+    top: 50%;
 
-            100% {
-                transform: translate(110vw, 100vh) rotate(0deg);
-            }
-        }
+    transform: translate(-50%, -50%);
 
-        .duck:nth-child(2) {
-            animation-duration: 11s;
-            animation-delay: -3s;
-        }
+    z-index: 10;
 
-        .duck:nth-child(3) {
-            animation-duration: 14s;
-            animation-delay: -7s;
-        }
+    border: 8px solid white;
+    border-radius: 25px;
 
-        .duck:nth-child(4) {
-            animation-duration: 9s;
-            animation-delay: -5s;
-        }
+    box-shadow:
+        0 0 30px black,
+        0 0 80px rgba(255,255,255,0.8);
 
-        .duck:nth-child(5) {
-            animation-duration: 17s;
-            animation-delay: -10s;
-        }
+    background: black;
+}
 
-        .duck:nth-child(6) {
-            animation-duration: 12s;
-            animation-delay: -1s;
-        }
+/* =========================
+   KACZKI
+========================= */
 
-        /* Przycisk */
-        #downloadButton {
-            position: fixed;
-            bottom: 25px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 20;
+.duck {
+    position: fixed;
+    z-index: 20;
 
-            padding: 14px 25px;
-            border: none;
-            border-radius: 12px;
+    font-size: var(--size);
 
-            background: #ffca28;
-            color: #222;
+    left: -100px;
+    top: var(--top);
 
-            font-size: 18px;
-            font-weight: bold;
+    animation: fly var(--speed) linear infinite;
 
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
+    animation-delay: var(--delay);
 
-        #downloadButton:hover {
-            background: #ffd54f;
-        }
+    filter: drop-shadow(3px 5px 3px rgba(0,0,0,0.35));
 
-        /* Dostosowanie do telefonu */
-        @media (max-width: 700px) {
-            .film {
-                width: 90vw;
-                height: calc(90vw * 0.5625);
-            }
+    user-select: none;
+    pointer-events: none;
+}
 
-            .duck {
-                font-size: 35px;
-            }
-        }
-    </style>
+@keyframes fly {
+
+    0% {
+        transform:
+            translateX(-150px)
+            translateY(0)
+            rotate(-15deg);
+    }
+
+    20% {
+        transform:
+            translateX(25vw)
+            translateY(-100px)
+            rotate(20deg);
+    }
+
+    40% {
+        transform:
+            translateX(50vw)
+            translateY(150px)
+            rotate(-20deg);
+    }
+
+    60% {
+        transform:
+            translateX(75vw)
+            translateY(-120px)
+            rotate(15deg);
+    }
+
+    80% {
+        transform:
+            translateX(100vw)
+            translateY(100px)
+            rotate(-10deg);
+    }
+
+    100% {
+        transform:
+            translateX(120vw)
+            translateY(-50px)
+            rotate(20deg);
+    }
+}
+
+/* =========================
+   PRZYCISK
+========================= */
+
+#downloadButton {
+
+    position: fixed;
+
+    bottom: 20px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    z-index: 100;
+
+    padding: 15px 30px;
+
+    border: 4px solid white;
+    border-radius: 20px;
+
+    background: #ffca28;
+
+    color: #222;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,0.4);
+}
+
+#downloadButton:hover {
+    background: #ffd740;
+    transform: translateX(-50%) scale(1.08);
+}
+
+/* =========================
+   TELEFON
+========================= */
+
+@media (max-width: 700px) {
+
+    .film {
+        width: 94vw;
+        height: 53vw;
+
+        border-width: 5px;
+    }
+
+    .duck {
+        font-size: 35px;
+    }
+
+    #downloadButton {
+        font-size: 15px;
+        padding: 10px 18px;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <!-- Kaczuszki -->
-    <div class="duck">🦆</div>
-    <div class="duck">🦆</div>
-    <div class="duck">🦆</div>
-    <div class="duck">🦆</div>
-    <div class="duck">🦆</div>
-    <div class="duck">🦆</div>
 
-    <!-- Rickroll na środku -->
-    <iframe
-        class="film"
-        src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&rel=0"
-        title="Film"
-        allow="autoplay; encrypted-media"
-        allowfullscreen>
-    </iframe>
+<!-- =====================================
+     RÓŻNE LATAJĄCE KACZKI
+====================================== -->
 
-    <!-- Przycisk awaryjnego pobrania -->
-    <button id="downloadButton">
-        🦆 Pobierz kaczkę 🦆
-    </button>
+<div class="duck" style="--top:5%;--size:55px;--speed:9s;--delay:-2s;">🦆</div>
 
-    <script>
-        // Tworzymy obrazek kaczki jako plik SVG
-        const duckSVG = `
-        <svg xmlns="http://www.w3.org/2000/svg"
-             width="500"
-             height="500"
-             viewBox="0 0 500 500">
+<div class="duck" style="--top:15%;--size:75px;--speed:13s;--delay:-7s;">🐥</div>
 
-            <rect width="500" height="500" fill="#87ceeb"/>
+<div class="duck" style="--top:30%;--size:45px;--speed:8s;--delay:-4s;">🦆</div>
 
-            <text
-                x="250"
-                y="300"
-                text-anchor="middle"
-                font-size="220">
-                🦆
-            </text>
+<div class="duck" style="--top:45%;--size:90px;--speed:16s;--delay:-11s;">🐤</div>
 
-        </svg>
-        `;
+<div class="duck" style="--top:60%;--size:60px;--speed:10s;--delay:-5s;">🦆</div>
 
-        function pobierzKaczke() {
-            const blob = new Blob(
-                [duckSVG],
-                { type: "image/svg+xml" }
-            );
+<div class="duck" style="--top:75%;--size:80px;--speed:14s;--delay:-9s;">🐥</div>
 
-            const url = URL.createObjectURL(blob);
+<div class="duck" style="--top:85%;--size:50px;--speed:7s;--delay:-3s;">🦆</div>
 
-            const link = document.createElement("a");
-            link.href = url;
-            link.download = "kaczka.svg";
+<div class="duck" style="--top:25%;--size:40px;--speed:11s;--delay:-8s;">🐤</div>
 
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+<div class="duck" style="--top:70%;--size:70px;--speed:18s;--delay:-15s;">🦆</div>
 
-            URL.revokeObjectURL(url);
-        }
+<div class="duck" style="--top:10%;--size:45px;--speed:12s;--delay:-6s;">🐥</div>
 
-        // Próba automatycznego pobrania
-        window.addEventListener("load", function() {
-            setTimeout(pobierzKaczke, 1000);
+<div class="duck" style="--top:50%;--size:100px;--speed:20s;--delay:-17s;">🦆</div>
+
+<div class="duck" style="--top:90%;--size:55px;--speed:9s;--delay:-1s;">🐤</div>
+
+<div class="duck" style="--top:35%;--size:65px;--speed:15s;--delay:-12s;">🦆</div>
+
+<div class="duck" style="--top:65%;--size:45px;--speed:8s;--delay:-6s;">🐥</div>
+
+<div class="duck" style="--top:20%;--size:85px;--speed:17s;--delay:-13s;">🦆</div>
+
+
+<!-- =====================================
+     RICKROLL
+====================================== -->
+
+<iframe
+    class="film"
+    src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&rel=0"
+    title="Rickroll"
+    allow="autoplay; encrypted-media"
+    allowfullscreen>
+</iframe>
+
+
+<!-- =====================================
+     POBIERANIE
+====================================== -->
+
+<button id="downloadButton">
+    🦆 POBIERZ KACZKI 🦆
+</button>
+
+
+<script>
+
+/*
+=================================================
+TWORZENIE RÓŻNYCH KACZEK
+=================================================
+*/
+
+const kaczki = [
+
+    "🦆",
+    "🐥",
+    "🐤",
+    "🦆",
+    "🐥",
+    "🐤",
+    "🦆",
+    "🐥",
+    "🐤",
+    "🦆",
+    "🐥",
+    "🐤"
+];
+
+
+/*
+=================================================
+TWORZENIE PLIKU SVG
+=================================================
+*/
+
+function stworzKaczke(emoji, numer) {
+
+    return `
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="600"
+    height="600"
+    viewBox="0 0 600 600">
+
+    <rect
+        width="600"
+        height="600"
+        rx="40"
+        fill="#87CEEB"/>
+
+    <circle
+        cx="300"
+        cy="300"
+        r="230"
+        fill="#ffffff"
+        opacity="0.3"/>
+
+    <text
+        x="300"
+        y="370"
+        text-anchor="middle"
+        font-size="260">
+
+        ${emoji}
+
+    </text>
+
+    <text
+        x="300"
+        y="530"
+        text-anchor="middle"
+        font-family="Arial"
+        font-size="35"
+        font-weight="bold">
+
+        KACZKA ${numer}
+
+    </text>
+
+</svg>
+`;
+
+}
+
+
+/*
+=================================================
+POBIERANIE JEDNEJ KACZKI
+=================================================
+*/
+
+function pobierzKaczke(emoji, numer) {
+
+    const svg = stworzKaczke(emoji, numer);
+
+    const blob = new Blob(
+        [svg],
+        { type: "image/svg+xml" }
+    );
+
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+
+    link.href = url;
+
+    link.download =
+        "kaczka_" + numer + ".svg";
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    document.body.removeChild(link);
+
+    URL.revokeObjectURL(url);
+}
+
+
+/*
+=================================================
+PRÓBA AUTOMATYCZNEGO POBRANIA
+=================================================
+*/
+
+window.addEventListener("load", function() {
+
+    setTimeout(function() {
+
+        /*
+        Próbujemy pobrać wszystkie kaczki.
+        Niektóre przeglądarki mogą zablokować
+        wielokrotne automatyczne pobieranie.
+        */
+
+        kaczki.forEach(function(emoji, index) {
+
+            setTimeout(function() {
+
+                pobierzKaczke(
+                    emoji,
+                    index + 1
+                );
+
+            }, index * 500);
+
         });
 
-        // Przycisk, jeśli przeglądarka zablokuje automatyczne pobieranie
-        document
-            .getElementById("downloadButton")
-            .addEventListener("click", pobierzKaczke);
-    </script>
+    }, 2000);
+
+});
+
+
+/*
+=================================================
+PRZYCISK
+=================================================
+*/
+
+document
+    .getElementById("downloadButton")
+    .addEventListener("click", function() {
+
+        kaczki.forEach(function(emoji, index) {
+
+            setTimeout(function() {
+
+                pobierzKaczke(
+                    emoji,
+                    index + 1
+                );
+
+            }, index * 500);
+
+        });
+
+    });
+
+</script>
 
 </body>
 </html>
