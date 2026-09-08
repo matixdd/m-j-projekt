@@ -3,16 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mój projekt</title>
+
+    <title>🦆 Duck Zone 🦆</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: linear-gradient(135deg, #87ceeb, #fff176);
+            font-family: Arial, sans-serif;
+        }
+
+        /* Film na środku */
+        .film {
+            position: absolute;
+            width: 560px;
+            height: 315px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            border: 5px solid white;
+            border-radius: 15px;
+            box-shadow: 0 0 40px rgba(0,0,0,0.5);
+            background: black;
+        }
+
+        /* Kaczuszki */
+        .duck {
+            position: absolute;
+            font-size: 50px;
+            z-index: 5;
+            animation: latanie linear infinite;
+        }
+
+        @keyframes latanie {
+            0% {
+                transform: translate(-100px, 100vh) rotate(0deg);
+            }
+
+            25% {
+                transform: translate(30vw, 20vh) rotate(20deg);
+            }
+
+            50% {
+                transform: translate(70vw, 70vh) rotate(-20deg);
+            }
+
+            75% {
+                transform: translate(90vw, 10vh) rotate(15deg);
+            }
+
+            100% {
+                transform: translate(110vw, 100vh) rotate(0deg);
+            }
+        }
+
+        .duck:nth-child(2) {
+            animation-duration: 11s;
+            animation-delay: -3s;
+        }
+
+        .duck:nth-child(3) {
+            animation-duration: 14s;
+            animation-delay: -7s;
+        }
+
+        .duck:nth-child(4) {
+            animation-duration: 9s;
+            animation-delay: -5s;
+        }
+
+        .duck:nth-child(5) {
+            animation-duration: 17s;
+            animation-delay: -10s;
+        }
+
+        .duck:nth-child(6) {
+            animation-duration: 12s;
+            animation-delay: -1s;
+        }
+
+        /* Przycisk */
+        #downloadButton {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+
+            padding: 14px 25px;
+            border: none;
+            border-radius: 12px;
+
+            background: #ffca28;
+            color: #222;
+
+            font-size: 18px;
+            font-weight: bold;
+
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        #downloadButton:hover {
+            background: #ffd54f;
+        }
+
+        /* Dostosowanie do telefonu */
+        @media (max-width: 700px) {
+            .film {
+                width: 90vw;
+                height: calc(90vw * 0.5625);
+            }
+
+            .duck {
+                font-size: 35px;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <h1 id="tekst">Witaj!</h1>
-    <p>To jest moja strona z JavaScriptem.</p>
+
+    <!-- Kaczuszki -->
+    <div class="duck">🦆</div>
+    <div class="duck">🦆</div>
+    <div class="duck">🦆</div>
+    <div class="duck">🦆</div>
+    <div class="duck">🦆</div>
+    <div class="duck">🦆</div>
+
+    <!-- Rickroll na środku -->
+    <iframe
+        class="film"
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&rel=0"
+        title="Film"
+        allow="autoplay; encrypted-media"
+        allowfullscreen>
+    </iframe>
+
+    <!-- Przycisk awaryjnego pobrania -->
+    <button id="downloadButton">
+        🦆 Pobierz kaczkę 🦆
+    </button>
 
     <script>
-        document.getElementById("tekst").textContent =
-            "JavaScript działa! 🚀";
+        // Tworzymy obrazek kaczki jako plik SVG
+        const duckSVG = `
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="500"
+             height="500"
+             viewBox="0 0 500 500">
+
+            <rect width="500" height="500" fill="#87ceeb"/>
+
+            <text
+                x="250"
+                y="300"
+                text-anchor="middle"
+                font-size="220">
+                🦆
+            </text>
+
+        </svg>
+        `;
+
+        function pobierzKaczke() {
+            const blob = new Blob(
+                [duckSVG],
+                { type: "image/svg+xml" }
+            );
+
+            const url = URL.createObjectURL(blob);
+
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = "kaczka.svg";
+
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            URL.revokeObjectURL(url);
+        }
+
+        // Próba automatycznego pobrania
+        window.addEventListener("load", function() {
+            setTimeout(pobierzKaczke, 1000);
+        });
+
+        // Przycisk, jeśli przeglądarka zablokuje automatyczne pobieranie
+        document
+            .getElementById("downloadButton")
+            .addEventListener("click", pobierzKaczke);
     </script>
+
 </body>
 </html>
